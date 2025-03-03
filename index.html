@@ -117,26 +117,23 @@
 
       function resizeCanvas() {
         let canvas = document.getElementById("unity-canvas");
-        let vh = window.innerHeight;
+        let dvh = window.innerHeight; // Using JS as fallback for dvh
         let vw = window.innerWidth;
         let aspectRatio = 540 / 960;
 
-        if (vw < 768) { // Detects phones (you can adjust this breakpoint)
-          // On phones, make it full-screen
+        if (vw < 768) { // Phone detection
           canvas.style.width = "100vw";
-          canvas.style.height = "100vh";
+          canvas.style.height = "100dvh"; // Use dvh for better mobile fit
         } else {
-          // On larger screens, maintain aspect ratio
-          let newHeight = vh;
+          let newHeight = dvh;
           let newWidth = newHeight * aspectRatio;
-
           canvas.style.width = `${newWidth}px`;
           canvas.style.height = `${newHeight}px`;
         }
       }
 
       window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
+      resizeCanvas(); // Call once to set initial size
     </script>
   </body>
 </html>
